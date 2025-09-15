@@ -61,7 +61,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         "ip"          => $ip,
         "password"    => $password,
         "language"    => $language,
-        "clickId"     => "click123",
+        "clickId"     => "",
         "quizAnswers" => "",
         "custom1"     => "",
         "custom2"     => "",
