@@ -2,42 +2,43 @@
         <footer class="bg-dark text-white text-center py-5">
             <span>All rights reserved | © 2025</span>
         </footer>
-
-        <?if($_SERVER['REQUEST_URI'] == '/'):?>
             
-            <div class="modal fade" id="successModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Дякуємо!</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            Ваші дані успішно відправлені, чекайте на двзінок.
-                        </div>
+        <div class="modal fade" id="successModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Дякуємо!</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Ваші дані успішно відправлені, чекайте на двзінок.
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="modal fade" id="errorModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Помилка!</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            Нажаль сталася помилка при відправці данних, спробуйте ще.
-                        </div>
+        <div class="modal fade" id="errorModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Помилка!</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Нажаль сталася помилка при відправці данних, спробуйте ще.
                     </div>
                 </div>
             </div>
+        </div>
 
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
-            <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    const form = document.querySelector('.action-form');
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const form = document.querySelector('.action-form');
+
+                if(form) {
+
                     const successModal = document.getElementById('successModal')
                     const errorModal = document.getElementById('errorModal')
 
@@ -96,21 +97,24 @@
                             console.error('Помилка:', error);
                         });
                     });
-                });
-            </script>
+                }
+            });
+        </script>
 
-        <?php else: ?>
+        <script>
+        document.addEventListener('DOMContentLoaded', function () {
 
-            <script>
-            document.addEventListener('DOMContentLoaded', function () {
+        let currentPage = 0;
+        let totalPages = 10;
+        const limit = 100;
 
-            let currentPage = 0;
-            let totalPages = 10;
-            const limit = 100;
+        const form = document.getElementById('filter-form');
 
-            const form = document.getElementById('filter-form');
+        if(form) {
+
             const dateFromInput = document.getElementById('date_from');
             const dateToInput = document.getElementById('date_to');
+            const loader = document.getElementById('loader');
 
             async function loadPage(page = 0) {
                 currentPage = page;
@@ -123,9 +127,13 @@
                 if (dateFrom) params.append('date_from', dateFrom);
                 if (dateTo) params.append('date_to', dateTo);
 
+                loader.classList.remove('d-none');
+
                 try {
                     const res = await fetch('/api-get-statuses.php?' + params.toString());
                     const json = await res.json();
+
+                    loader.classList.add('d-none');
 
                     if (!json.status) throw new Error('API повернул помилку');
 
@@ -134,6 +142,7 @@
                     renderPagination(currentPage, totalPages); */
                 } catch (err) {
                     alert('Помилка завантаження ' + err.message);
+                    loader.classList.add('d-none');
                 }
             }
 
@@ -210,25 +219,24 @@
                 e.preventDefault();
                 loadPage(0);
             });
-            });
-            </script>
-
-        <?endif; ?>
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-
-                const header = document.querySelector('header');
-
-                window.addEventListener('scroll', function () {
-
-                    if (window.scrollY > 200) {
-                        header.classList.add('fixed');
-                    } else {
-                        header.classList.remove('fixed');
-                    }
-                });
-            });
+        }
+        });
         </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const header = document.querySelector('header');
+
+            window.addEventListener('scroll', function () {
+
+                if (window.scrollY > 200) {
+                    header.classList.add('fixed');
+                } else {
+                    header.classList.remove('fixed');
+                }
+            });
+        });
+    </script>
     </body>
 </html>

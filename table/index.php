@@ -28,7 +28,10 @@ print_r($data); */
       <input type="date" class="form-control" id="date_to" name="date_to" value="<?php echo $_GET['date_to'] ?? '' ?>">
     </div>
     <div class="col-md-2 align-self-end">
-      <button type="submit" class="btn btn-primary">Фільтрувати</button>
+      <div class="d-flex align-items-center">
+        <button type="submit" class="btn btn-primary">Фільтрувати</button>
+        <i class="bi bi-arrow-repeat ms-3 fs-4 animated-circle d-none" id="loader"></i>
+      </div>
     </div>
   </form>
 

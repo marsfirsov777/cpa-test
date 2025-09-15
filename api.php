@@ -23,7 +23,6 @@ function add_lead(array $data) {
 
     if(curl_errno($ch)) {
         $response = json_encode(['status' => false, 'message' => 'Помилка: ' . curl_error($ch)]);
-        exit;
     }
 
     curl_close($ch);
@@ -57,7 +56,6 @@ function get_statuses(string $date_from, string $date_to, int $page = 0, int $li
 
     if(curl_errno($ch)) {
         $response = json_encode(['status' => false, 'message' => 'Помилка: ' . curl_error($ch)]);
-        exit;
     }
     curl_close($ch);
     
