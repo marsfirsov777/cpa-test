@@ -1,0 +1,114 @@
+:root {
+    --black-color: #000;
+    --gray-color: #585858;
+    --white-color: #ffffff;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-size: 16px;
+    color: var(--black-color);
+}
+
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.4);
+    z-index: 30;
+    transition: all .3s ease 0s;
+}
+
+.header.fixed {
+    position: fixed;
+    background-color: var(--white-color);
+}
+
+h1 {
+    color: var(--black-color);
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul.list-1 li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 5px;
+}
+
+
+ul.list-1 li:last-child {
+    margin-bottom: 0;
+}
+
+ul.list-1 li .bi {
+    position: absolute; 
+    top: 0;
+    left: 0;
+}
+
+p {
+    color: var(--gray-color);
+}
+
+.welcome-section {
+    height: 100vh;
+    background: linear-gradient(90deg,rgba(13, 130, 214, 1) 0%, rgba(0, 0, 0, 0) 100%), url(/images/welcome-bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.welcome-section__description {
+    max-width: 500px;
+}
+
+.feature-section__icon {
+    width: 75px;
+    height: 75px;
+}
+
+.service-section {
+    background: linear-gradient(180deg,rgba(13, 130, 214, 1) 0%, rgba(0, 0, 0, 0) 100%), url(/images/farm-landscape-with-barn-1600.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.service-section__item .card {
+    height: 100%;
+}
+
+.service-section__image {
+    width: 100%;
+    max-height: 200px;
+    -o-object-fit: cover;
+     object-fit: cover;
+    -o-object-position: center;
+    object-position: center;
+}
+
+.service__button {
+    margin: auto auto 0;
+}
+
+.contact-section__image {
+    -o-object-position: top;
+    object-position: top;
+    max-height: 400px;
+}
+
+.status-page {
+    margin-top: 75px;
+}
